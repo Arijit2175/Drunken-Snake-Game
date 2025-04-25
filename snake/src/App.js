@@ -42,3 +42,12 @@ export default function DrunkenSnake() {
         x: snake[0].x + newDir.x,
         y: snake[0].y + newDir.y,
       };
+
+      if (
+        newHead.x < 0 || newHead.x >= gridSize ||
+        newHead.y < 0 || newHead.y >= gridSize ||
+        snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
+      ) {
+        setGameOver(true);
+        return;
+      }
