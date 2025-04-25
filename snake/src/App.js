@@ -25,6 +25,14 @@ function areOpposite(d1, d2) {
   return d1.x + d2.x === 0 && d1.y + d2.y === 0;
 }
 
+function getHeadEmoji(dir) {
+  if (dir.x === 0 && dir.y === -1) return "🔼"; 
+  if (dir.x === 0 && dir.y === 1) return "🔽"; 
+  if (dir.x === -1 && dir.y === 0) return "◀️"; 
+  if (dir.x === 1 && dir.y === 0) return "▶️"; 
+  return "🔺";
+}
+
 function App() {
   const initialSnake = [{ x: 10, y: 10 }];
   const [snake, setSnake] = useState(initialSnake);
