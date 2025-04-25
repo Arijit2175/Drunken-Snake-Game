@@ -105,3 +105,5 @@ const directions = {
     </div>
   );
 }
+
+export default App;
