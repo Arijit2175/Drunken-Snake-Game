@@ -15,3 +15,15 @@ export default function DrunkenSnake() {
   const [food, setFood] = useState({ x: 5, y: 5 });
   const [gameOver, setGameOver] = useState(false);
   const dirRef = useRef(dir);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (directions[e.key]) {
+        dirRef.current = directions[e.key];
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
+  
