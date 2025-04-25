@@ -160,12 +160,7 @@ function App() {
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "16px",
-                backgroundColor: isSnake
-                  ? "#00ff00"
-                  : isFood
-                  ? "#ff0000"
-                  : "#111",
-                transition: "background-color 0.1s",
+                backgroundColor: "#111"
               }}
               >
                 {isSnake ? "🟢" : isFood ? "🍎" : ""}
