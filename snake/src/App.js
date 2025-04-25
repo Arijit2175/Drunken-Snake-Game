@@ -69,3 +69,38 @@ export default function DrunkenSnake() {
 
     return () => clearInterval(interval);
   }, [snake, food, gameOver]);
+
+  return (
+    <div className="flex flex-col items-center mt-4">
+      <h1 className="text-2xl mb-2">🥴 Drunken Snake</h1>
+      {gameOver && <h2 className="text-red-500">Game Over</h2>}
+      <div
+        className="grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${gridSize}, 20px)`,
+          gridTemplateRows: `repeat(${gridSize}, 20px)`,
+          gap: "1px",
+          background: "#333",
+        }}
+      >
+        {Array.from({ length: gridSize * gridSize }).map((_, i) => {
+          const x = i % gridSize;
+          const y = Math.floor(i / gridSize);
+          const isSnake = snake.some(seg => seg.x === x && seg.y === y);
+          const isFood = food.x === x && food.y === y;
+          return (
+            <div
+              key={i}
+              style={{
+                width: "20px",
+                height: "20px",
+                background: isSnake ? "#00FF00" : isFood ? "#FF0000" : "#111",
+              }}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
