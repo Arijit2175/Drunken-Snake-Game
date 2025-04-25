@@ -26,4 +26,5 @@ export default function DrunkenSnake() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
-  
+  useEffect(() => {
+    if (gameOver) return;
