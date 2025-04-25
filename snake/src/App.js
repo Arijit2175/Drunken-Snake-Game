@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
+//Size of grid
 const gridSize = 20;
 
+//Direction mappings
 const directions = {
   ArrowUp: { x: 0, y: -1 },
   ArrowDown: { x: 0, y: 1 },
@@ -10,6 +12,7 @@ const directions = {
   ArrowRight: { x: 1, y: 0 },
 };
 
+//Generate food in random positions
 function randomFood(snake) {
   while (true) {
     const x = Math.floor(Math.random() * gridSize);
@@ -19,10 +22,12 @@ function randomFood(snake) {
   }
 }
 
+//To check if two directions are opposite
 function areOpposite(d1, d2) {
   return d1.x + d2.x === 0 && d1.y + d2.y === 0;
 }
 
+//For design of the head
 function getHeadEmoji(dir) {
   if (dir.x === 0 && dir.y === -1) return "🔼";
   if (dir.x === 0 && dir.y === 1) return "🔽";
@@ -31,6 +36,7 @@ function getHeadEmoji(dir) {
   return "🔺";
 }
 
+//Initializing the App component
 function App() {
   const initialSnake = [{ x: 10, y: 10 }];
   const [snake, setSnake] = useState(initialSnake);
@@ -41,6 +47,7 @@ function App() {
   const [hasStarted, setHasStarted] = useState(false);
   const dirRef = useRef(dir);
 
+  //Listen for keyboard keys
   useEffect(() => {
     const handleKey = (e) => {
       const newDir = directions[e.key];
@@ -109,6 +116,7 @@ function App() {
     return () => clearInterval(interval);
   }, [snake, food, gameOver, score, hasStarted]);
 
+  //Restart the game
   const restartGame = () => {
     setSnake(initialSnake);
     setDir(directions.ArrowRight);
@@ -119,6 +127,7 @@ function App() {
     setHasStarted(false);
   };
 
+  //Render the game
   return (
     <div className="App" style={{ textAlign: "center", marginTop: "20px" }}>
       <h1>🥴 Drunken Snake</h1>
@@ -201,4 +210,5 @@ function App() {
   );
 }
 
+//Exporting the App component
 export default App;
