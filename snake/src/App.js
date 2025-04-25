@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./App.css"; 
+import "./App.css";
 
 function App() {
   const gridSize = 20;
@@ -19,16 +19,26 @@ function App() {
   const dirRef = useRef(dir);
 
   function randomFood() {
-    return {
-      x: Math.floor(Math.random() * gridSize),
-      y: Math.floor(Math.random() * gridSize),
-    };
+    let newFood;
+    while (true) {
+      newFood = {
+        x: Math.floor(Math.random() * gridSize),
+        y: Math.floor(Math.random() * gridSize),
+      };
+      if (!snake.some(seg => seg.x === newFood.x && seg.y === newFood.y)) break;
+    }
+    return newFood;
+  }
+
+  function areOpposite(d1, d2) {
+    return d1.x + d2.x === 0 && d1.y + d2.y === 0;
   }
 
   useEffect(() => {
     const handleKey = (e) => {
-      if (directions[e.key]) {
-        dirRef.current = directions[e.key];
+      const newDir = directions[e.key];
+      if (newDir && !areOpposite(newDir, dirRef.current)) {
+        dirRef.current = newDir;
       }
     };
     window.addEventListener("keydown", handleKey);
@@ -40,9 +50,24 @@ function App() {
 
     const interval = setInterval(() => {
       let newDir = dirRef.current;
-      if (Math.random() < 0.2) {
-        const options = Object.values(directions);
-        newDir = options[Math.floor(Math.random() * options.length)];
+      if (Math.random() < 0.15) {
+        const options = Object.values(directions).filter(d =>
+          !areOpposite(d, dirRef.current)
+        );
+        const possibleDirs = options.filter(d => {
+          const nx = snake[0].x + d.x;
+          const ny = snake[0].y + d.y;
+          return (
+            nx >= 0 &&
+            nx < gridSize &&
+            ny >= 0 &&
+            ny < gridSize &&
+            !snake.some(seg => seg.x === nx && seg.y === ny)
+          );
+        });
+        if (possibleDirs.length > 0) {
+          newDir = possibleDirs[Math.floor(Math.random() * possibleDirs.length)];
+        }
       }
 
       const newHead = {
@@ -55,14 +80,13 @@ function App() {
         newHead.x >= gridSize ||
         newHead.y < 0 ||
         newHead.y >= gridSize ||
-        snake.some((seg) => seg.x === newHead.x && seg.y === newHead.y)
+        snake.some(seg => seg.x === newHead.x && seg.y === newHead.y)
       ) {
         setGameOver(true);
         return;
       }
 
       let newSnake = [newHead, ...snake];
-
       if (newHead.x === food.x && newHead.y === food.y) {
         setScore(score + 1);
         setFood(randomFood());
@@ -73,7 +97,7 @@ function App() {
       setSnake(newSnake);
       setDir(newDir);
       dirRef.current = newDir;
-    }, 200);
+    }, 100); 
 
     return () => clearInterval(interval);
   }, [snake, food, gameOver, score]);
@@ -137,7 +161,7 @@ function App() {
                   : isFood
                   ? "#ff0000"
                   : "#111",
-                boxSizing: "border-box",
+                transition: "background-color 0.1s",
               }}
             />
           );
