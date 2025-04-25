@@ -11,14 +11,14 @@ const directions = {
 };
 
 function randomFood(snake) {
-  let newF;
-  do {
-    newF = {
-      x: Math.floor(Math.random() * gridSize),
-      y: Math.floor(Math.random() * gridSize),
-    };
-  } while (snake.some(seg => seg.x === newF.x && seg.y === newF.y));
-  return newF;
+  while (true) {
+    const x = Math.floor(Math.random() * gridSize);
+    const y = Math.floor(Math.random() * gridSize);
+    const isOnSnake = snake.find(seg => seg.x === x && seg.y === y);
+    if (!isOnSnake) {
+      return { x, y };
+    }
+  }
 }
 
 function areOpposite(d1, d2) {
