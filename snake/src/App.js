@@ -50,7 +50,7 @@ function App() {
 
     const interval = setInterval(() => {
       let newDir = dirRef.current;
-      if (Math.random() < 0.15) {
+      if (Math.random() < 0.05) {
         const options = Object.values(directions).filter(d =>
           !areOpposite(d, dirRef.current)
         );
