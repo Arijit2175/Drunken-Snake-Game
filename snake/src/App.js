@@ -66,3 +66,6 @@ export default function DrunkenSnake() {
       setDir(newDir);
       dirRef.current = newDir;
     }, 200);
+
+    return () => clearInterval(interval);
+  }, [snake, food, gameOver]);
