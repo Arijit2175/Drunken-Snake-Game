@@ -156,6 +156,10 @@ function App() {
               style={{
                 width: "20px",
                 height: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "16px",
                 backgroundColor: isSnake
                   ? "#00ff00"
                   : isFood
@@ -163,7 +167,9 @@ function App() {
                   : "#111",
                 transition: "background-color 0.1s",
               }}
-            />
+              >
+                {isSnake ? "🟢" : isFood ? "🍎" : ""}
+            </div>
           );
         })}
       </div>
