@@ -61,3 +61,8 @@ export default function DrunkenSnake() {
       } else {
         newSnake.pop();
       }
+
+      setSnake(newSnake);
+      setDir(newDir);
+      dirRef.current = newDir;
+    }, 200);
