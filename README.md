@@ -54,10 +54,7 @@ Directional emojis used to indicate snake heading's:
  └── App.js       # Main game logic
  └── App.css      # Optional styling (grid, fonts)
 ```
-
-# Preview
-**Here's a small preview of the game**:
-![Demo of the game](assets/drunken_snake.png)
+<br>
 
 **Developed by** - @Arijit2175
 
