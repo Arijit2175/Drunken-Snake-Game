@@ -55,6 +55,13 @@ Directional emojis used to indicate snake heading's:
  └── App.css      # Optional styling (grid, fonts)
 ```
 
+# Preview
+**Here's a small preview of the game**:
+<video width="320" height="240" autoplay loop muted>
+  <source src="../drunken_snake.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 **Developed by** - @Arijit2175
 
 Enjoy the game and try not to crash! 🍻🐍
