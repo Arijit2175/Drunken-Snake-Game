@@ -147,6 +147,7 @@ function App() {
         {Array.from({ length: gridSize * gridSize }).map((_, i) => {
           const x = i % gridSize;
           const y = Math.floor(i / gridSize);
+          const isHead = snake.length > 0 && snake[0].x === x && snake[0].y === y;
           const isSnake = snake.some((seg) => seg.x === x && seg.y === y);
           const isFood = food.x === x && food.y === y;
 
@@ -160,12 +161,12 @@ function App() {
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "16px",
-                backgroundColor: "#111"
+                backgroundColor: "#111",
               }}
-              >
-                {isSnake ? "🟢" : isFood ? "🍎" : ""}
-            </div>
-          );
+            >
+          {isHead ? "🐍" : isSnake ? "🟢" : isFood ? "🍎" : ""}
+        </div>
+      );
         })}
       </div>
     </div>
