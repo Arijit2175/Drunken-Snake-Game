@@ -57,10 +57,7 @@ Directional emojis used to indicate snake heading's:
 
 # Preview
 **Here's a small preview of the game**:
-<video width="320" height="240" autoplay loop muted>
-  <source src="../drunken_snake.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Demo of the game](../drunken_snake.mp4)
 
 **Developed by** - @Arijit2175
 
