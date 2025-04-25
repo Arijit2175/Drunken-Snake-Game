@@ -57,7 +57,7 @@ Directional emojis used to indicate snake heading's:
 
 # Preview
 **Here's a small preview of the game**:
-[Demo of the game](../drunken_snake.png)
+![Demo of the game](../drunken_snake.png)
 
 **Developed by** - @Arijit2175
 
