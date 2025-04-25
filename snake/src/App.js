@@ -9,3 +9,9 @@ const directions = {
   ArrowRight: { x: 1, y: 0 },
 };
 
+export default function DrunkenSnake() {
+  const [snake, setSnake] = useState(initialSnake);
+  const [dir, setDir] = useState(directions.ArrowRight);
+  const [food, setFood] = useState({ x: 5, y: 5 });
+  const [gameOver, setGameOver] = useState(false);
+  const dirRef = useRef(dir);
