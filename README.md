@@ -47,3 +47,11 @@ Directional emojis used to indicate snake heading's:
 - **Arrow keys**: Change direction
 - **Start Game**: Begins the game
 - **Restart Game**: Appears on game over
+
+## 📁 File Structure
+```
+/src
+ └── App.js       # Main game logic
+ └── App.css      # Optional styling (grid, fonts)
+```
+
