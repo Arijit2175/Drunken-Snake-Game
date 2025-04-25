@@ -15,9 +15,7 @@ function randomFood(snake) {
     const x = Math.floor(Math.random() * gridSize);
     const y = Math.floor(Math.random() * gridSize);
     const isOnSnake = snake.find(seg => seg.x === x && seg.y === y);
-    if (!isOnSnake) {
-      return { x, y };
-    }
+    if (!isOnSnake) return { x, y };
   }
 }
 
@@ -26,10 +24,10 @@ function areOpposite(d1, d2) {
 }
 
 function getHeadEmoji(dir) {
-  if (dir.x === 0 && dir.y === -1) return "🔼"; 
-  if (dir.x === 0 && dir.y === 1) return "🔽"; 
-  if (dir.x === -1 && dir.y === 0) return "◀️"; 
-  if (dir.x === 1 && dir.y === 0) return "▶️"; 
+  if (dir.x === 0 && dir.y === -1) return "🔼";
+  if (dir.x === 0 && dir.y === 1) return "🔽";
+  if (dir.x === -1 && dir.y === 0) return "◀️";
+  if (dir.x === 1 && dir.y === 0) return "▶️";
   return "🔺";
 }
 
@@ -40,6 +38,7 @@ function App() {
   const [food, setFood] = useState(randomFood(initialSnake));
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
   const dirRef = useRef(dir);
 
   useEffect(() => {
@@ -54,7 +53,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (gameOver) return;
+    if (!hasStarted || gameOver) return;
 
     const interval = setInterval(() => {
       let newDir = dirRef.current;
@@ -105,10 +104,10 @@ function App() {
       setSnake(newSnake);
       setDir(newDir);
       dirRef.current = newDir;
-    }, 100); 
+    }, 100);
 
     return () => clearInterval(interval);
-  }, [snake, food, gameOver, score]);
+  }, [snake, food, gameOver, score, hasStarted]);
 
   const restartGame = () => {
     setSnake(initialSnake);
@@ -117,12 +116,27 @@ function App() {
     setFood(randomFood(initialSnake));
     setScore(0);
     setGameOver(false);
+    setHasStarted(false);
   };
 
   return (
     <div className="App" style={{ textAlign: "center", marginTop: "20px" }}>
       <h1>🥴 Drunken Snake</h1>
       <h2>Score: {score}</h2>
+
+      {!hasStarted && !gameOver && (
+        <button
+          onClick={() => setHasStarted(true)}
+          style={{
+            padding: "10px 20px",
+            fontSize: "16px",
+            cursor: "pointer",
+            marginBottom: "10px",
+          }}
+        >
+          ▶️ Start Game
+        </button>
+      )}
 
       {gameOver && (
         <>
@@ -172,15 +186,15 @@ function App() {
                 backgroundColor: "#111",
               }}
             >
-          {isHead
-            ? getHeadEmoji(dir)
-            : isSnake
-            ? "🟢"
-            : isFood
-            ? "🍎"
-            : ""}
-          </div>
-        );
+              {isHead
+                ? getHeadEmoji(dir)
+                : isSnake
+                ? "🟢"
+                : isFood
+                ? "🍎"
+                : ""}
+            </div>
+          );
         })}
       </div>
     </div>
