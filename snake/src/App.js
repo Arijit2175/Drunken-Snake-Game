@@ -1,38 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
-function App() {
-  const gridSize = 20;
-  const initialSnake = [{ x: 10, y: 10 }];
-  const directions = {
-    ArrowUp: { x: 0, y: -1 },
-    ArrowDown: { x: 0, y: 1 },
-    ArrowLeft: { x: -1, y: 0 },
-    ArrowRight: { x: 1, y: 0 },
-  };
+const gridSize = 20;
 
+const directions = {
+  ArrowUp: { x: 0, y: -1 },
+  ArrowDown: { x: 0, y: 1 },
+  ArrowLeft: { x: -1, y: 0 },
+  ArrowRight: { x: 1, y: 0 },
+};
+
+function randomFood(snake) {
+  let newF;
+  do {
+    newF = {
+      x: Math.floor(Math.random() * gridSize),
+      y: Math.floor(Math.random() * gridSize),
+    };
+  } while (snake.some(seg => seg.x === newF.x && seg.y === newF.y));
+  return newF;
+}
+
+function areOpposite(d1, d2) {
+  return d1.x + d2.x === 0 && d1.y + d2.y === 0;
+}
+
+function App() {
+  const initialSnake = [{ x: 10, y: 10 }];
   const [snake, setSnake] = useState(initialSnake);
   const [dir, setDir] = useState(directions.ArrowRight);
-  const [food, setFood] = useState(randomFood());
+  const [food, setFood] = useState(randomFood(initialSnake));
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const dirRef = useRef(dir);
-
-  function randomFood() {
-    let newFood;
-    while (true) {
-      newFood = {
-        x: Math.floor(Math.random() * gridSize),
-        y: Math.floor(Math.random() * gridSize),
-      };
-      if (!snake.some(seg => seg.x === newFood.x && seg.y === newFood.y)) break;
-    }
-    return newFood;
-  }
-
-  function areOpposite(d1, d2) {
-    return d1.x + d2.x === 0 && d1.y + d2.y === 0;
-  }
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -89,7 +89,7 @@ function App() {
       let newSnake = [newHead, ...snake];
       if (newHead.x === food.x && newHead.y === food.y) {
         setScore(score + 1);
-        setFood(randomFood());
+        setFood(randomFood(newSnake));
       } else {
         newSnake.pop();
       }
@@ -106,7 +106,7 @@ function App() {
     setSnake(initialSnake);
     setDir(directions.ArrowRight);
     dirRef.current = directions.ArrowRight;
-    setFood(randomFood());
+    setFood(randomFood(initialSnake));
     setScore(0);
     setGameOver(false);
   };
