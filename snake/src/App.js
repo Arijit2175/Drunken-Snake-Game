@@ -28,3 +28,17 @@ export default function DrunkenSnake() {
 
   useEffect(() => {
     if (gameOver) return;
+
+    const interval = setInterval(() => {
+      const wobble = Math.random();
+      let newDir = dirRef.current;
+
+      if (wobble < 0.2) {
+        const options = Object.values(directions);
+        newDir = options[Math.floor(Math.random() * options.length)];
+      }
+
+      const newHead = {
+        x: snake[0].x + newDir.x,
+        y: snake[0].y + newDir.y,
+      };
