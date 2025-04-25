@@ -18,3 +18,28 @@ This is a fun little variation of the classic Snake game made with React. The sn
    ```
 3. Open **http://localhost:3000** to play.
 
+# 🧠 Game Logic Breakdown
+## Grid Setup
+- Grid size: **20 x 20**
+- Controlled with CSS grid layout
+
+## Snake behaviour
+- The initial snake has one segment
+- Snake moves every 100ms
+- Direction changes via arrow keys, unless it would reverse the snake
+- A small random deviation (5% chance) makes the snake pick a different, valid direction
+
+## Food Placement
+- Randomly placed on the grid
+- Never overlaps the snake
+
+## Collision Logic
+The game ends if the snake hits the wall or itself
+
+## Head Emoji
+Directional emojis used to indicate snake heading's: 
+- **🔼** Up
+- **🔽** Down
+- **◀️** Left
+- **▶️** Right
+
