@@ -172,9 +172,15 @@ function App() {
                 backgroundColor: "#111",
               }}
             >
-          {isHead ? "🐍" : isSnake ? "🟢" : isFood ? "🍎" : ""}
-        </div>
-      );
+          {isHead
+            ? getHeadEmoji(dir)
+            : isSnake
+            ? "🟢"
+            : isFood
+            ? "🍎"
+            : ""}
+          </div>
+        );
         })}
       </div>
     </div>
