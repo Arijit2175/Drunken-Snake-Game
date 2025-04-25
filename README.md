@@ -43,3 +43,7 @@ Directional emojis used to indicate snake heading's:
 - **◀️** Left
 - **▶️** Right
 
+## 🎮 Controls
+- **Arrow keys**: Change direction
+- **Start Game**: Begins the game
+- **Restart Game**: Appears on game over
