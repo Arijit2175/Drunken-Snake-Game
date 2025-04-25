@@ -56,3 +56,5 @@ Directional emojis used to indicate snake heading's:
 ```
 
 **Developed by** - @Arijit2175
+
+Enjoy the game and try not to crash! 🍻🐍
