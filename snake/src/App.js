@@ -51,3 +51,13 @@ export default function DrunkenSnake() {
         setGameOver(true);
         return;
       }
+
+      let newSnake = [newHead, ...snake];
+      if (newHead.x === food.x && newHead.y === food.y) {
+        setFood({
+          x: Math.floor(Math.random() * gridSize),
+          y: Math.floor(Math.random() * gridSize)
+        });
+      } else {
+        newSnake.pop();
+      }
